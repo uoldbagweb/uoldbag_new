@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="store.html">Shop</a>
+        <a href="/about">About</a>
+    </div>
+
+    <div class="content">
+        <img src="logo.png" alt="Your Logo" id="logo">
+    </div>
+
+    <div class="banner">
+        <marquee behavior="scroll" direction="left" id="announcementMarquee"></marquee>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Slide-down the navbar after a brief delay
+            setTimeout(function() {
+                document.querySelector('.navbar').classList.add('active');
+            }, 100);
+
+            // Fade-in the logo after a brief delay
+            setTimeout(function() {
+                if(document.getElementById('logo')) {
+                    document.getElementById('logo').style.opacity = '1';
+                }
+            }, 100);  // adjusted to account for navbar slide-down delay
+
+            // Recede the navbar and banner when navigating away from index.html
+            var navLinks = document.querySelectorAll('.navbar a');
+
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    navigateAway();  // Call the function to handle all navigation animations
+
+                    // Store the destination URL
+                    var destinationUrl = e.target.href;
+
+                    // Wait for the animation to complete, then navigate
+                    setTimeout(function() {
+                        window.location = destinationUrl;
+                    }, 1500);  // adjusted this to account for both the navbar/banner animations and logo fade-out
+                });
+            });
+
+            // Load the announcements
+            fetch('announcements.txt')
+            .then(response => response.text())
+            .then(data => {
+                // Split the fetched text into lines
+                let lines = data.split('\n');
+
+                // Filter out empty lines and commented lines
+                let filteredLines = lines.filter(line => line.trim() !== '' && !line.trim().startsWith('#'));
+
+                // Select a random announcement from the filtered lines
+                let randomIndex = Math.floor(Math.random() * filteredLines.length);
+                let randomAnnouncement = filteredLines[randomIndex];
+
+                // Update the marquee's text content with the random announcement
+                document.getElementById('announcementMarquee').textContent = randomAnnouncement;
+            })
+            .catch(error => {
+                console.error('Error fetching announcements:', error);
+            });
+        });
+
+        function navigateAway() {
+            let navbar = document.querySelector('.navbar');
+            let banner = document.querySelector('.banner');
+            let logo = document.getElementById('logo');
+
+            // Start the animations for navbar and banner
+            navbar.style.top = '-100px';
+            banner.style.bottom = '-60px';
+
+            // Fade out the logo after the navbar and marquee recede
+            setTimeout(function() {
+                logo.classList.add('fade-out-logo');  // Add the fade-out class
+            }, 800);
+        }
+
+    </script>
+       
+    </script>
+    
+</body>
+
+</html>

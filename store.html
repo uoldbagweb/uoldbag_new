@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="store-page">
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="/about">About</a>
+    </div>
+
+    <div class="store-grid">
+        <!-- Sample products; replicate for more products -->
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img class="product-img" src="product1.jpg" alt="Product 1">
+            <div class="product-info">
+                <span class="product-name">Alice_001</span>
+                <span class="product-size">Medium</span>
+                <span class="product-price">$9.99</span>
+            </div>
+        </div>
+        
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.querySelector('.navbar').classList.add('active');
+            }, 100);
+
+            // Fade in animation for product cards
+            let productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.classList.add('fade-in-animation');
+            });
+
+            // Intercept click events on all <a> elements to add fade out and navbar recede
+            document.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    let href = this.getAttribute('href');
+                    
+                    // Start receding animation for navbar
+                    document.querySelector('.navbar').classList.add('recede');
+
+                    // Start fade-out animation for product cards
+                    productCards.forEach(card => {
+                        card.classList.remove('fade-in-animation');
+                        card.classList.add('fade-out-animation');
+                    });
+
+                    // Delay the navigation so the animations complete
+                    setTimeout(function() {
+                        window.location.href = href;
+                    }, 500); // Match this delay to the duration of your animations
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
